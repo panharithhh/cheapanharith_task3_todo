@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Task 3 - Todo App with Router</title>
+  <style>
+    @page { size: A4; margin: 16mm 18mm; }
+    body {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 11pt;
+      line-height: 1.45;
+      color: #111;
+      margin: 0;
+    }
+    h1 { font-size: 18pt; margin: 0 0 2mm; }
+    h2 { font-size: 13pt; margin: 8mm 0 3mm; }
+    p { margin: 0 0 2mm; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6mm 6mm;
+      align-items: start;
+    }
+    figure { margin: 0; break-inside: avoid; }
+    figure img { width: 100%; display: block; border: 1px solid #bbb; }
+    figcaption { font-size: 9.5pt; margin-top: 1.5mm; color: #333; }
+    ol { padding-left: 5mm; margin: 0; }
+    li { margin-bottom: 3mm; }
+    code { font-family: Menlo, monospace; font-size: 9.5pt; }
+  </style>
+</head>
+<body>
+
+  <h1>Task 3: Todo App with Router</h1>
+  <p>Chea Panharith</p>
+
+  <h2>1. Repo</h2>
+  <p>__REPO_LINK__</p>
+
+  <h2>2. Screenshots</h2>
+  <div class="grid">
+    <figure>
+      <img src="screenshots/1-todos-completed-filter.png" alt="">
+      <figcaption>/todos with the Completed filter on. Only the two ticked items show.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/2-todos-after-clear.png" alt="">
+      <figcaption>After Clear completed, back on All. The ticked ones are gone and the other two are left.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/3-users-loading.png" alt="">
+      <figcaption>/users while the fetch is still running, so the skeleton rows show. I slowed the request down by 2.5 seconds to get this shot.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/4-users-loaded.png" alt="">
+      <figcaption>Same page once the data came back.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/5-users-id-direct.png" alt="">
+      <figcaption>/users/3 opened directly with a fresh page load, not clicked through from the list.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/6-not-found.png" alt="">
+      <figcaption>/this/page/does/not/exist lands on the 404 route.</figcaption>
+    </figure>
+  </div>
+
+  <h2>3. What each cleanup prevents</h2>
+  <ol>
+    <li><code>WindowWidth</code> (resize listener): the cleanup takes the listener off the window, so after I leave /todos it isn't still calling <code>setWidth</code> on a component that's gone, and I don't pile up an extra listener every time I come back.</li>
+    <li><code>UserDirectory</code> (fetch when the search changes): the cleanup sets <code>cancelled</code> to true, so if I type a new search while an older request is still loading, the old response is ignored and can't overwrite the newer results.</li>
+    <li><code>UserDetail</code> (fetch when the id changes): same idea for the id in the URL, so if I jump from /users/1 to /users/2 quickly, the late answer for user 1 can't replace user 2's page.</li>
+  </ol>
+
+</body>
+</html>

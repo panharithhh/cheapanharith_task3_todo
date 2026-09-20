@@ -1,0 +1,41 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+nav a.active,
+button.active {
+  font-weight: bold;
+}
+
+.done {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.error {
+  color: crimson;
+}
+
+.skeleton {
+  height: 1.25rem;
+  margin: 0.75rem 0;
+  list-style: none;
+  border-radius: 4px;
+  background: #ddd;
+  animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    opacity: 0.4;
+  }
+}
